@@ -1,2 +1,2 @@
-# project3
-Project 3
+# Project 3
+Author: `<Place your name here>`
