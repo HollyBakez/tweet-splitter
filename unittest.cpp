@@ -196,37 +196,7 @@ TEST_CASE("MultiTweet", "[mtweet]")
       CHECK(mt.getSize() > 0);
     }
   }
-  SECTION("Constructor and Tweet splitting implementation - less than 280")
-  {
-    for(int i = 0; i < 10; i++)
-    {
-      string username = generate_string(rand()%15);
-      string message = generate_string(rand()%280);
-      MultiTweet mt(username, message);
-      string output = func_str_out([&](){
-        mt.display();
-      });
-      string expected = "@" + username + ": " + message + "\n";
-      CHECK(mt.getSize() == 1);
-      CHECK(output == expected);
-    }
-  }
-  SECTION("setMessage and Tweet splitting implementation - less than 280")
-  {
-    for(int i = 0; i < 10; i++)
-    {
-      string username = generate_string(rand()%15);
-      string message = generate_string(rand()%280);
-      MultiTweet mt(username, message);
-      mt.setMessage(message);
-      string output = func_str_out([&](){
-        mt.display();
-      });
-      string expected = "@" + username + ": " + message + "\n";
-      CHECK(mt.getSize() == 1);
-      CHECK(output == expected);
-    }
-  }
+
   SECTION("More than 280 characters, split on space")
   {
     for(int i = 0; i < 10; i++)
