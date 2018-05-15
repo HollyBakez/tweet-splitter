@@ -106,6 +106,11 @@ public:
          size = s;
      }
      
+     int getSize()
+     {
+         return size;
+     }
+     
      void addMessage(string message);
      
      void display();
