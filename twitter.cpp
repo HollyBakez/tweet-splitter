@@ -14,7 +14,7 @@ void MultiTweet::splitTweets()
         int semicolon = message.rfind(";",273);
         int dash = message.rfind("-",273);
         int split;
-        if(space > ex && space > ques && space > period)
+        if(space > ex && space > ques && space > period && space > semicolon && space > dash)
         {
             split = space;
         }
@@ -27,8 +27,8 @@ void MultiTweet::splitTweets()
         else if(semicolon > space && semicolon > ex && semicolon > ques && semicolon > period && semicolon > dash)
             split = semicolon;
         else if(dash > space && dash > ex && dash > ques && dash > period && dash > semicolon)
-            split = semicolon;    
-        else if(period == -1 && space == -1 && ques == -1 && ex == -1)
+            split = dash;    
+        else if(period == -1 && space == -1 && ques == -1 && ex == -1 && dash == -1 && semicolon == -1)
             split = 273;
         subMessages[size]=getMessage().substr(0,split+1); //set username too
         setMessage(getMessage().substr(split+1));
