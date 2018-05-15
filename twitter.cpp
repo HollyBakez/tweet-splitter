@@ -5,6 +5,7 @@
 void MultiTweet::splitTweets()
 {
      string message = getMessage();
+
     while (message.length()>274)
     {
         int space = message.rfind(" ", 273);
@@ -12,30 +13,33 @@ void MultiTweet::splitTweets()
         int ques = message.rfind("?",273);
         int period = message.rfind(".",273);
         int semicolon = message.rfind(";",273);
+        int coma = message.rfind(",",273);
         int dash = message.rfind("-",273);
         int split;
-        if(space > ex && space > ques && space > period && space > semicolon && space > dash)
+        if(space > ex && space > ques && space > period && space > semicolon && space > dash && space > coma)
         {
             split = space;
         }
-        else if(ex > space && ex > ques && ex > period && ex > semicolon && ex > dash)
+        else if (coma > space && coma > ex && coma > ques && coma > period && coma > semicolon && coma > dash)
+            split = coma;
+        else if(ex > space && ex > ques && ex > period && ex > semicolon && ex > dash && ex > coma)
             split = ex;
-        else if(ques > space && ques > ex && ques > period && ques > semicolon && ques > dash)
+        else if(ques > space && ques > ex && ques > period && ques > semicolon && ques > dash && ques > coma)
             split = ques;
-        else if(period > space && period > ex && period > ques && period > semicolon && period > dash)
+        else if(period > space && period > ex && period > ques && period > semicolon && period > dash && period > coma)
             split = period;
-        else if(semicolon > space && semicolon > ex && semicolon > ques && semicolon > period && semicolon > dash)
+        else if(semicolon > space && semicolon > ex && semicolon > ques && semicolon > period && semicolon > dash && semicolon > coma)
             split = semicolon;
-        else if(dash > space && dash > ex && dash > ques && dash > period && dash > semicolon)
+        else if(dash > space && dash > ex && dash > ques && dash > period && dash > semicolon && dash > coma)
             split = dash;    
-        else if(period == -1 && space == -1 && ques == -1 && ex == -1 && dash == -1 && semicolon == -1)
+        else if(period == -1 && space == -1 && ques == -1 && ex == -1 && dash == -1 && semicolon == -1 && coma ==-1)
             split = 273;
-        subMessages[size]=getMessage().substr(0,split+1); //set username too
-        setMessage(getMessage().substr(split+1));
+        subMessages[size]=message.substr(0,split+1); //set username too
+        message = message.substr(split+1);
         size++;
     }
     if (message.length() > 0)
-    {
+    {      
         subMessages[size]= message;
         size++;
     }
@@ -46,7 +50,7 @@ void MultiTweet::display()
 {
     for ( int i = 0; i<size ; i++)
     {
-    cout <<subMessages[i]<< " ("<< i+1 << "/" << size <<") "<<endl;
+    cout << "@"<<getUsername() << ": "<<subMessages[i] << " ("<< i+1 << "/" << size <<")"<<endl;
     }
 }
 // Insert code here to implement TweetStream functions
